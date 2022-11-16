@@ -1,0 +1,66 @@
+substitutions:
+  name: "m5atom-lite-bpt"
+  
+esphome:
+  name: "${name}"
+  # Automatically add the mac address to the name
+  # so you can use a single firmware for all devices
+  name_add_mac_suffix: true
+  
+  # This will allow for (future) project identification,
+  # configuration and updates.
+  project:
+    name: esphome.m5atom-lite-bpt
+    version: "1.0"
+    
+esp32  : 
+  board :  m5stack-atom 
+  framework : 
+    type :  arduino
+
+# To be able to get logs from the device via serial and api.
+logger:
+
+# API is a requirement of the dashboard import.
+api:
+
+# OTA is required for Over-the-Air updating
+ota:
+  
+# This should point to the public location of this yaml file.
+dashboard_import:
+  package_import_url: https://github.com/RiggsUS/esphome-homedevice-configs/blob/1b2d7ae785fafcffe0042f60b093240e8a199f06/btp.yaml
+  
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+  # Set up a wifi access point
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Btp Fallback Hotspot"
+    password: "BtpFH"
+    
+# In combination with the `ap` this allows the user
+# to provision wifi credentials to the device.
+captive_portal:
+  # Optionally, preserve provisioned credentials
+  # over subsequent OTA updates.
+  keep_user_credentials: true
+  
+# Sets up Bluetooth LE (Only on ESP32) to allow the user
+# to provision wifi credentials to the device.
+esp32_improv:
+  authorizer: none
+  
+# Sets up the improv via serial client for Wi-Fi provisioning
+improv_serial: 
+
+esp32_ble_tracker : 
+  scan_parameters : 
+    interval :  1100ms 
+    window :  1100ms 
+    active :  true 
+
+bluetooth_proxy : 
+  active :  true 
