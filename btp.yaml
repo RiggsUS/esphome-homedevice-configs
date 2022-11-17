@@ -39,7 +39,7 @@ wifi:
   # Enable fallback hotspot (captive portal) in case wifi connection fails
   ap:
     ssid: "Btp Fallback Hotspot"
-    password: "BtpFH"
+    password: "BtpFHotspot"
     
 # In combination with the `ap` this allows the user
 # to provision wifi credentials to the device.
